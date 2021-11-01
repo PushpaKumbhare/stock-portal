@@ -30,9 +30,19 @@ const StockList = (props) => {
 
     useEffect( () => {fetchStockData()},[]);
 
+    const handleChange = (event) => {
+         fetch(StockListAPI)
+        .then(response => response.json())
+        .then(data => {
+              setStockList(data)
+              setStockListFiltered(data)
+         });
+    }
+
+
     return (
         <div className="stocklist">
-            <input 
+            <input className="form-control"
                 style={BarStyling}
                 key="searchbar1"
                 value={searchword}
@@ -40,7 +50,7 @@ const StockList = (props) => {
                 onChange={(e) => updateSearchword(e.target.value)}
             />
             <div className="flatlist">
-                <FlatList flatList={stockListFiltered}/>
+                <FlatList flatList={stockListFiltered} change={handleChange} />
             </div>
         </div>
     );

@@ -55,12 +55,12 @@ router.post('/watchlist/add', async(req, res) => {
 
 router.post('/watchlist/remove', async(req, res) => {
   try {
-    const data = await watchlistAction.findAll(req.body)
-    res.status(200).send(data);
+    const data = await watchlistAction.deleteById(req.body)
+    return res.status(200).send({data});
   }
   catch(e){
     console.log(e)
-    res.status(500).send({message: 'Server Error at watchlist remove'})
+    return res.status(500).send({message: 'Server Error at watchlist remove'})
   }
   
 });

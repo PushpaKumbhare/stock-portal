@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { WatchListAPI, WatchListAddAPI, WatchListRemoveAPI } from '../const/constants';
 
-const FlatList = ({flatList=[], remove=false}) => {
+const FlatList = ({flatList=[], remove=false, change}) => {
     const [watchStockList, setWatchStockList] = useState([]);
 
     const WatchStockData = async () => {
@@ -24,7 +24,7 @@ const FlatList = ({flatList=[], remove=false}) => {
             .then(response => response.json())
             .then(data => {
             });
-        setWatchStockList(new Set([...watchStockList, symbol]))
+        setWatchStockList([...watchStockList, symbol])
     }
 
     const removeFromWatchList = async (symbol) =>{
@@ -38,7 +38,8 @@ const FlatList = ({flatList=[], remove=false}) => {
             .then(data => {
             });
       const arr = [...watchStockList].filter(s => s !== symbol)
-      setWatchStockList(new Set(arr))
+      change(symbol)
+      setWatchStockList(arr)
     }
 
     useEffect( () => {WatchStockData()},[]);

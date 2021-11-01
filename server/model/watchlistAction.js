@@ -21,7 +21,11 @@ async function findAll() {
 }
 
 async function deleteById(symbol) {
-    return await watchlistRec.destroy({ where: { symbol: symbol } });
+    return await watchlistRec.destroy({
+         where: { 
+             symbol: symbol["symbol"]
+        } 
+    });
 }
 
 async function create(symbol) {

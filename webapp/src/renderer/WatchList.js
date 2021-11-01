@@ -12,13 +12,23 @@ const WatchList = (props) => {
                 setWatchStockList(data);
             });
     }
-    
+
+    const handleChange = (event) => {
+        console.log(event)
+        fetch(WatchListAPI)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            setWatchStockList(data);
+        });
+    }
+
     useEffect( () => {WatchStockData()},[]);
 
     return (
         <div className="stocklist">
             <div className="flatlist">
-                <FlatList flatList={watchStockList} remove={true}/>
+                <FlatList flatList={watchStockList} change={handleChange} remove={true}/>
             </div>
         </div>
     );
