@@ -1,0 +1,1 @@
+exports.STOCK_DATA_URL = 'https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050'
